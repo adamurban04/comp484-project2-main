@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <!-- head: load jQuery, script.js, style.css -->
   <head>
     <title>Your Giga Pet</title>
     <meta name="description" content="A cool thing made with Glitch">
@@ -7,12 +8,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Load jQuery FIRST so $ is defined before our script runs -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js" defer
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
 
-    <!-- Our script is deferred too, and will run AFTER jQuery because defer scripts keep order -->
+    <!-- Script is deferred too, and will run AFTER jQuery because defer scripts keep order -->
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
   </head>
@@ -25,13 +27,24 @@
 
     <main>
       <section class="pet-image-container">
-         <!-- Replace pet image with your own pet image -->
-        <img class="pet-image" src="">
+         <!-- Pet sprites -->
+        <img id="pet-sprite" class="pet-image" src="images/neutral.jpg" alt="My Giga Pet">
       </section>
       <section class="dashboard">
         <div>Name: <strong><span class="name"></span></strong></div>
-        <div>Weight: <strong><span class="weight"></span> pounds</strong></div>
-        <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
+
+        <!-- Change Name-->
+        <div class="name-edit">
+          <input class="name-input" type="text" maxlength="16" placeholder="New name...">
+          <button class="set-name-button" type="button">Set Name</button>
+        </div>
+
+         <!-- Stats-->
+        <div>Weight: <strong><span class="weight"></span> kilograms</strong></div>
+        <div>Happiness: <strong><span class="happiness"></span> tail wags</strong></div>
+        <div>Energy: <strong><span class="energy"></span> meows</strong></div>
+
+        <!-- Actions Buttons-->
         <div class="button-container">
           <button class="treat-button">
             Treat
@@ -42,9 +55,23 @@
           <button class="exercise-button">
             Exercise
           </button>
+          <button class="sleep-button">
+            Sleep
+          </button>
         </div>
       </section>
     </main>
+
+    <!-- Pet Message -->
+    <div class="game-textbox" role="status" aria-live="polite" aria-atomic="true">
+      <div class="pet-message">Choose an action for Amin!</div>
+    </div>
+
+    <!-- Sound effects -->
+    <audio id="sfx-treat" src="sounds/treat.mp3" preload="auto"></audio>
+    <audio id="sfx-play" src="sounds/play.mp3" preload="auto"></audio>
+    <audio id="sfx-exercise" src="sounds/exercise.mp3" preload="auto"></audio>
+    <audio id="sfx-sleep" src="sounds/sleep.mp3" preload="auto"></audio>
 
   </body>
 </html>

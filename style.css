@@ -2,24 +2,84 @@
 * {
     box-sizing: border-box;
   }
+
+  /* Global variables */
+  :root {
+    --panel-gap: 22px;   /* space between the cat panel and the stats panel */
+    --textbox-gap: 33px; /* textbox spacing */
+
+    /* font for stats/buttons */
+    --ui-font: "Avenir Next", "Avenir", "Gill Sans", "Trebuchet MS", system-ui, -apple-system, sans-serif;
+
+    /* Rainbow border. */
+    --rainbow-linear: linear-gradient(90deg,
+      #ff004c,
+      #ff8a00,
+      #ffe600,
+      #00d084,
+      #00c2ff,
+      #6a5cff,
+      #c400ff
+    );
+  }
   
   body {
-    font-family: helvetica, arial, sans-serif;
-    margin: 25px;
+    /* Default font for most UI text (stats/buttons) */
+    font-family: var(--ui-font);
+
+    /* Make text unselectable by default */
+    user-select: none;
+    -webkit-user-select: none;
+    
+    margin: 0;
+    /* More space */
+    padding: 24px 16px 180px;
+
+    /* Background settings */
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
   
   main {
-    display:block;
-    height:175px;
+    /* Everything centered in a vertical layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--panel-gap);
+    height: auto;
+    width: min(760px, 100%);
+    margin: 0 auto;
+    padding-bottom: var(--textbox-gap);
   }
   
   header {
-    border-bottom: 1px solid black;
+    /* Center the title */
+    width: min(760px, 100%);
+    margin: 0 auto 14px;
+    border-bottom: none;
+    text-align: center;
   }
   
   h1 {
+    /* Cool font Papyrus for title */
+    font-family: "Papyrus", "Herculanum", "Copperplate", "Bradley Hand", cursive;
+    letter-spacing: 1.5px;
+    display: inline-block;
     font-weight: bold;
-    color: #000;
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 12px;
+
+    /* Linear rainbow border (2 backgrounds) */
+    border: 3px solid transparent;
+    background:
+      linear-gradient(rgba(17, 17, 17, 0.65), rgba(17, 17, 17, 0.65)) padding-box,
+      var(--rainbow-linear) border-box;
+
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   }
   
   .bold {
@@ -45,38 +105,169 @@
     margin:5px;
   }
   
+  /* Sprite Styling */
   .pet-image {
-    height:250px;
+    height: 260px;
+
+    /* This lets me animate the sprite without changing the layout around it */
+    position: relative;
+    top: 0;
+
+    border-radius: 12px;
+
+    /* Linear rainbow border */
+    border: 3px solid transparent;
+    background:
+      linear-gradient(transparent, transparent) padding-box,
+      var(--rainbow-linear) border-box;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
   }
   
+  /* Dashboard = stats panel */
   .dashboard div {
     display:block;
   }
   
   .pet-image-container {
-    float:left;
-    padding:10px;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+
+    background: none;
+    border: none;
+    border-radius: 0;
+    backdrop-filter: none;
   }
   
   .dashboard {
-    float:left;
-    padding:20px;
+    position: relative;
+
+    padding: 18px;
+    text-align: center;
+    width: 100%;
+
+    /* Linear rainbow border */
+    border: 3px solid transparent;
+    border-radius: 12px;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)) padding-box,
+      var(--rainbow-linear) border-box;
+  }
+
+  .dashboard div {
+    /* A little spacing for stats */
+    margin: 6px 0;
+    font-size: 16px;
+  }
+
+  .name-edit {
+    /* Top-right corner of the stats box. */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .name-input {
+    user-select: text;
+    -webkit-user-select: text;
+
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 2px solid rgba(17, 17, 17, 0.30);
+    width: 130px;
+    font-size: 12px;
+  }
+
+  .set-name-button {
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 2px solid rgba(17, 17, 17, 0.35);
+    background: rgba(255, 255, 255, 0.92);
+    cursor: pointer;
+    font-size: 12px;
+
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* If a stat is in a critical range, turn it red so it stands out */
+  .critical {
+    color: #b91c1c;
+    font-weight: bold;
   }
   
-  .button-container {
-    margin-top:20px;
-  }
   
   .button-container button {
-    width: 100px;
-      margin-right: 10px;
-      text-align: center;
-      display: inline-block;
-      float: left;
-    font-size:15px;
-    background-color: #1e2835;
-    border-color: #404853;
-    cursor:pointer;
-    background-image: linear-gradient(to bottom,rgba(246,246,246,.1)0%,rgba(30,40,53,0)66%);
-    color: #fafafa;
+    width: 120px;
+    padding: 10px 12px;
+    text-align: center;
+    display: inline-block;
+
+    font-family: var(--ui-font);
+
+    font-size: 15px;
+    color: #111;
+
+    cursor: pointer;
+    border-radius: 10px;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    background: rgba(255, 215, 243, 0.95);
+    border: 2px solid rgba(17, 17, 17, 0.55);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  }
+
+  .button-container button:active {
+    /* Tiny press effect */
+    transform: translateY(1px);
+  }
+
+  .button-container button:hover {
+    /* Simple hover feedback */
+    filter: brightness(1.1);
+  }
+
+  /* Fixed Pokemon-style text box */
+  .game-textbox {
+    position: fixed;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(760px, calc(100vw - 24px));
+    padding: 14px 16px;
+
+    /* Linear rainbow border */
+    border: 2.5px solid transparent;
+    border-radius: 10px;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)) padding-box,
+      var(--rainbow-linear) border-box;
+
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Second border */
+  .game-textbox::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1.75px solid rgba(116, 0, 151, 0.75);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  .pet-message {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #111;
+    opacity: 1;
   }
